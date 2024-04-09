@@ -1,14 +1,10 @@
 # Functions and Classes for Car Rental Platform
-
-import datetime
-
-
 class Car:
     # Variable/Class attribute to track the number of available cars
     num_cars = 0
 
     # cars = []
-    #car_id = 0
+    # car_id = 0
 
     # Constructor
     def __init__(self, make, model, year, color, hourly=30, daily=200, weekly=1000):
@@ -19,7 +15,6 @@ class Car:
         self.hourly = hourly
         self.daily = daily
         self.weekly = weekly
-        # Car.cars = {Car.num_cars: [make, model, year, color]}
         # Car.cars.append(Car)
         Car.num_cars += 1
 
@@ -38,4 +33,14 @@ class Car:
         # for i in range(Car.num_cars):
         #     print(Car.cars[i])
 
-    # def rent_hourly(self):
+    # Method to Calculate Car Rental Bill from Hourly Rate
+    def rent_hourly(self, hours):
+        return hours * self.hourly
+
+    # Method to Calculate Car Rental Bill from Daily Rate
+    def rent_daily(self, days):
+        return days * self.daily
+
+    # Method to Calculate Car Rental Bill from Weekly Rate
+    def rent_weekly(self, weeks):
+        return weeks * self.weekly
