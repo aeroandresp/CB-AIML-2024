@@ -3,9 +3,6 @@ class Car:
     # Variable/Class attribute to track the number of available cars
     num_cars = 0
 
-    # cars = []
-    # car_id = 0
-
     # Constructor
     def __init__(self, make, model, year, color, hourly=30, daily=200, weekly=1000):
         self.make = make
@@ -15,7 +12,6 @@ class Car:
         self.hourly = hourly
         self.daily = daily
         self.weekly = weekly
-        # Car.cars.append(Car)
         Car.num_cars += 1
 
     # Display Car Information Method
@@ -26,12 +22,9 @@ class Car:
         print('Year: ', self.year)
         print('Color: ', self.color)
 
-    # Method to Number of Available Cars
+    # Method to Display Number of Available Cars
     def available_cars(self):
         print('There are currently ', Car.num_cars, 'cars available:')
-        # Work in Progress
-        # for i in range(Car.num_cars):
-        #     print(Car.cars[i])
 
     # Method to Calculate Car Rental Bill from Hourly Rate
     def rent_hourly(self, hours):
