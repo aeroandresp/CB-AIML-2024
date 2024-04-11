@@ -12,6 +12,7 @@ class Car:
         self.hourly = hourly
         self.daily = daily
         self.weekly = weekly
+        self.car_list = []
         Car.num_cars += 1
 
     # Display Car Information Method
@@ -21,6 +22,10 @@ class Car:
         print('Model: ', self.model)
         print('Year: ', self.year)
         print('Color: ', self.color)
+
+    # Method to Add Car (class) to a List
+    def add_car(self, car):
+        self.car_list.append(car)
 
     # Method to Display Number of Available Cars
     def available_cars(self):
