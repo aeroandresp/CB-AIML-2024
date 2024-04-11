@@ -4,7 +4,7 @@ class Car:
     num_cars = 0
 
     # Constructor
-    def __init__(self, make, model, year, color, hourly=30, daily=200, weekly=1000):
+    def __init__(self, make, model, year, color, hourly=30, daily=200, weekly=1000, available=True):
         self.make = make
         self.model = model
         self.year = year
@@ -12,6 +12,7 @@ class Car:
         self.hourly = hourly
         self.daily = daily
         self.weekly = weekly
+        self.available = available
         self.car_list = []
         Car.num_cars += 1
 
