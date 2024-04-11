@@ -19,10 +19,11 @@ class Car:
     # Display Car Information Method
     def print_car_info(self):
         print('Car Information:')
-        print('Make: ', self.make)
-        print('Model: ', self.model)
-        print('Year: ', self.year)
-        print('Color: ', self.color)
+        print('Make:      ', self.make)
+        print('Model:     ', self.model)
+        print('Year:      ', self.year)
+        print('Color:     ', self.color)
+        print('Available: ', self.available)
 
     # Method to Add Car (class) to a List
     def add_car(self, car):
@@ -35,10 +36,10 @@ class Car:
     def available_cars(self, car_obj_list):
         print('There are currently', Car.num_cars, 'cars available:')
         for car_obj in car_obj_list:
-            print(
-                car_obj.year, car_obj.color, car_obj.make, car_obj.model
+            if car_obj.available:
+                print(
+                    car_obj.year, car_obj.color, car_obj.make, car_obj.model
                 )
-
 
     # Method to Calculate Car Rental Bill from Hourly Rate
     def rent_hourly(self, hours):
@@ -51,3 +52,13 @@ class Car:
     # Method to Calculate Car Rental Bill from Weekly Rate
     def rent_weekly(self, weeks):
         return weeks * self.weekly
+
+class Customer(Car):
+
+    def __init__(self, name):
+        self.name = name
+
+    def print_customer_info(self):
+        print(self.name)
+
+    # def retrive_car(self):
