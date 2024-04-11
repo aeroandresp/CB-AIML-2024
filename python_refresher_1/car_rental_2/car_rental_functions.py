@@ -30,6 +30,9 @@ class Car:
     # Method to Display Number of Available Cars
     def available_cars(self):
         print('There are currently ', Car.num_cars, 'cars available:')
+        for i, car_obj in enumerate(self.car_list):
+            print(self.car_list[i].make)
+
 
     # Method to Calculate Car Rental Bill from Hourly Rate
     def rent_hourly(self, hours):
