@@ -5,7 +5,7 @@ import datetime
 
 def main():
     # Initialize Car Objects
-    c1 = car_rental_functions.Car('Toyota', 'Camry', 2020, 'Red', available=False)
+    c1 = car_rental_functions.Car('Toyota', 'Camry', 2020, 'Red')
     c2 = car_rental_functions.Car('Tesla', 'Model Y', 2024, 'White')
     c3 = car_rental_functions.Car('Honda', 'Civic', 2023, 'Black')
     c4 = car_rental_functions.Car('Nissan', 'Altima', 2019, 'Blue')
@@ -21,12 +21,16 @@ def main():
     # Store List of Cars in a Variable
     car_list = c1.get_car_list()
 
-    c1.print_car_info()
-    c1.available_cars(car_list)
+    # c1.print_car_info()
+    # c1.available_cars(car_list)
 
     # Customer
     ct1 = car_rental_functions.Customer('Andres')
     ct1.print_customer_info()
+
+    ct1.available_cars(car_list)
+    ct1.retrieve_cars(car_list, [0,2])
+    ct1.available_cars(car_list)
 
 
 # Start Script Here
