@@ -1,4 +1,8 @@
 # Functions and Classes for Car Rental Platform
+
+# Adds classes to manipulate dates and time
+from datetime import datetime
+
 class Car:
     # Variable (Class Attribute) to track the number of available cars
     num_cars = 0
@@ -61,7 +65,11 @@ class Customer(Car):
         self.rented_cars = [] # Car objects rented by customer
         self.requested_cars = [] # Car object indices of rented cars by customer
         self.bill = 0
+
+        ### Variables to Track Rental Time ###
         self.rental_time = 0
+        self.rental_start = 0
+        self.rental_end = 0
 
         ### Rental Modes ###
         self.hour = False
@@ -106,9 +114,13 @@ class Customer(Car):
             print(Car.car_list[i].year, Car.car_list[i].color, Car.car_list[i].make, Car.car_list[i].model)
         print('Adding Cars to ', self.name, '\'s Cart', sep='')
 
+        # Record Start Time
+        self.rental_start = datetime.now()
+        print('Start of Rental:', self.rental_start)
+
     def rental_mode(self):
         while True:
-            print('Available Rental Methods:')
+            print('Available Rental Modes:')
             print('H or h ---> Hourly')
             print('D or d ---> Daily')
             print('W or w ---> Weekly')

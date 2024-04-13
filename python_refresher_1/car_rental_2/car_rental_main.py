@@ -1,6 +1,5 @@
 # Main Function to Run Car Rental Platform
 import car_rental_functions
-import datetime
 
 
 def main():
