@@ -13,11 +13,22 @@ def main():
 
     c1.print_car_info()
 
-    # Customer
+    # Customer 1
     ct1 = car_rental_functions.Customer(input('What is your name?\n'))
     ct1.print_customer_info()
     ct1.available_cars()
     ct1.retrieve_cars()
+    ct1.available_cars()
+
+    # Customer 2
+    ct2 = car_rental_functions.Customer(input('What is your name?\n'))
+    ct2.print_customer_info()
+    ct2.available_cars()
+    ct2.retrieve_cars()
+    ct2.available_cars()
+
+    # Customer 1 Again
+    ct1.return_cars()
     ct1.available_cars()
 
 

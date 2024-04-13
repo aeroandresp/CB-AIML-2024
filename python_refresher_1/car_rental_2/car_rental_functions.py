@@ -58,7 +58,8 @@ class Customer(Car):
 
     def __init__(self, name):
         self.name = name
-        self.rented_cars = []
+        self.rented_cars = [] # Car objects rented by customer
+        self.requested_cars = [] # Car object indices of rented cars by customer
         self.bill = 0
         self.rental_time = 0
 
@@ -68,29 +69,40 @@ class Customer(Car):
 
     # Method for Customer to retrieve cars for rent
     def retrieve_cars(self):
-        requested_cars = []
 
         n = int(input("Enter number of cars you would like to request: "))
 
         for i in range(0, n):
-            print(i, ':', sep='', end=' ')
-            car_i = int(input('Which car would you like to rent?  '))
-            # adding the element
-            requested_cars.append(car_i)
+            # Infinite While Loop incase Customer Tries to Choose Unavailable Car
+            while True:
+                print(i+1, ':', sep='', end=' ')
+                car_i = int(input('Which car would you like to rent?  '))
+
+                if Car.car_list[car_i].available:
+                    # adding the element
+                    self.requested_cars.append(car_i)
+                    Car.car_list[car_i].available = False
+                    Car.num_cars -= 1
+                    break
+                else:
+                    print('Error: Car not available. Please try again')
 
         # Do if requested cars is both positive and less than or equal to total available cars
-        if len(Car.car_list) >= len(requested_cars) > 0:
+        if len(Car.car_list) >= len(self.requested_cars) > 0:
             print('Requested the following cars:')
-            for i in requested_cars:
+            for i in self.requested_cars:
                 self.rented_cars.append(Car.car_list[i])
-                Car.car_list[i].available = False
-                Car.num_cars -= 1
                 print(Car.car_list[i].year, Car.car_list[i].color, Car.car_list[i].make, Car.car_list[i].model)
         else:
             print('Error: Only', len(Car.car_list), 'available to check out')
 
     def return_cars(self):
         if len(self.rented_cars) != 0:
-            pass
+            print('Returning the following cars:')
+            for i in self.requested_cars:
+                Car.car_list[i].available = True
+                Car.num_cars += 1
+                print(Car.car_list[i].year, Car.car_list[i].color, Car.car_list[i].make, Car.car_list[i].model)
+            self.rented_cars.clear()
         else:
             print('Error: You have no cars rented out')
