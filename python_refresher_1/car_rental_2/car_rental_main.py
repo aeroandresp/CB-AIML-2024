@@ -14,10 +14,10 @@ def main():
     c1.print_car_info()
 
     # Customer
-    ct1 = car_rental_functions.Customer('Andres')
+    ct1 = car_rental_functions.Customer(input('What is your name?\n'))
     ct1.print_customer_info()
     ct1.available_cars()
-    ct1.retrieve_cars([0,1,2,3,4,5])
+    ct1.retrieve_cars([0,1,2,3])
     ct1.available_cars()
 
 
