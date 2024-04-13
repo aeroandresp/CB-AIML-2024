@@ -7,7 +7,7 @@ class Car:
     car_list = []
 
     # Constructor
-    def __init__(self, make, model, year, color, hourly=30, daily=200, weekly=1000, available=True):
+    def __init__(self, make, model, year, color, hourly=30, daily=200, weekly=1000):
         ### Car Attributes ###
         self.make = make
         self.model = model
@@ -20,7 +20,7 @@ class Car:
         self.weekly = weekly
 
         ### Car Availability ###
-        self.available = available
+        self.available = True
 
         ### Other Attributes ###
         Car.car_list.append(self)
@@ -42,17 +42,17 @@ class Car:
             if car_obj.available:
                 print(i, '--->', car_obj.year, car_obj.color, car_obj.make, car_obj.model)
 
-    # Method to Calculate Car Rental Bill from Hourly Rate
-    def rent_hourly(self, hours):
-        return hours * self.hourly
-
-    # Method to Calculate Car Rental Bill from Daily Rate
-    def rent_daily(self, days):
-        return days * self.daily
-
-    # Method to Calculate Car Rental Bill from Weekly Rate
-    def rent_weekly(self, weeks):
-        return weeks * self.weekly
+    # # Method to Calculate Car Rental Bill from Hourly Rate
+    # def rent_hourly(self, hours):
+    #     return hours * self.hourly
+    #
+    # # Method to Calculate Car Rental Bill from Daily Rate
+    # def rent_daily(self, days):
+    #     return days * self.daily
+    #
+    # # Method to Calculate Car Rental Bill from Weekly Rate
+    # def rent_weekly(self, weeks):
+    #     return weeks * self.weekly
 
 class Customer(Car):
 
