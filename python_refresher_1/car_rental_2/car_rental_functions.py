@@ -60,13 +60,24 @@ class Customer(Car):
         self.name = name
         self.rented_cars = []
         self.bill = 0
+        self.rental_time = 0
 
     # Method to Display Customer Info
     def print_customer_info(self):
         print(self.name)
 
     # Method for Customer to retrieve cars for rent
-    def retrieve_cars(self, requested_cars):
+    def retrieve_cars(self):
+        requested_cars = []
+
+        n = int(input("Enter number of cars you would like to request: "))
+
+        for i in range(0, n):
+            print(i, ':', sep='', end=' ')
+            car_i = int(input('Which car would you like to rent?  '))
+            # adding the element
+            requested_cars.append(car_i)
+
         # Do if requested cars is both positive and less than or equal to total available cars
         if len(Car.car_list) >= len(requested_cars) > 0:
             print('Requested the following cars:')

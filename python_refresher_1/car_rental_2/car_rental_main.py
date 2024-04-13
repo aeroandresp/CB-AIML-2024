@@ -17,7 +17,7 @@ def main():
     ct1 = car_rental_functions.Customer(input('What is your name?\n'))
     ct1.print_customer_info()
     ct1.available_cars()
-    ct1.retrieve_cars([0,1,2,3])
+    ct1.retrieve_cars()
     ct1.available_cars()
 
 
