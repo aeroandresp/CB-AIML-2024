@@ -63,6 +63,11 @@ class Customer(Car):
         self.bill = 0
         self.rental_time = 0
 
+        ### Rental Modes ###
+        self.hour = False
+        self.day = False
+        self.week = False
+
     # Method to Display Customer Info
     def print_customer_info(self):
         print(self.name)
@@ -100,6 +105,28 @@ class Customer(Car):
             self.rented_cars.append(Car.car_list[i])
             print(Car.car_list[i].year, Car.car_list[i].color, Car.car_list[i].make, Car.car_list[i].model)
         print('Adding Cars to ', self.name, '\'s Cart', sep='')
+
+    def rental_mode(self):
+        while True:
+            print('Available Rental Methods:')
+            print('H or h ---> Hourly')
+            print('D or d ---> Daily')
+            print('W or w ---> Weekly')
+            rent_method = str(input('Enter Rental Method You Desire: '))
+            if rent_method == 'h' or rent_method == 'H':
+                self.hour = True
+                print('Rental Method: Hourly')
+                break
+            elif rent_method == 'd' or rent_method == 'D':
+                self.day = True
+                print('Rental Method: Daily')
+                break
+            elif rent_method == 'w' or rent_method == 'W':
+                self.week = True
+                print('Rental Method: Weekly')
+                break
+            else:
+                print('Error: Not a valid rental method. Please try again')
 
     def return_cars(self):
         if len(self.rented_cars) != 0:
