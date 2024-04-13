@@ -11,7 +11,7 @@ def main():
     c4 = car_rental_functions.Car('Nissan', 'Altima', 2019, 'Blue')
     c5 = car_rental_functions.Car('Ford', 'F-150', 2022, 'Grey')
 
-    c1.print_car_info()
+    # c1.print_car_info()
 
     # Customer 1
     ct1 = car_rental_functions.Customer(input('What is your name?\n'))

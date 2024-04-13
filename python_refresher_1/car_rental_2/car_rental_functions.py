@@ -70,8 +70,15 @@ class Customer(Car):
     # Method for Customer to retrieve cars for rent
     def retrieve_cars(self):
 
-        n = int(input("Enter number of cars you would like to request: "))
+        # Do if requested cars (n) is both positive and less than or equal to total available cars
+        while True:
+            n = int(input("Enter number of cars you would like to request: "))
+            if Car.num_cars >= n > 0:
+                break
+            else:
+                print('Error: Only', Car.num_cars, 'available to check out. Please try again')
 
+        # Adds Customer Requested Cars into a List Based on Availability
         for i in range(0, n):
             # Infinite While Loop incase Customer Tries to Choose Unavailable Car
             while True:
@@ -85,16 +92,14 @@ class Customer(Car):
                     Car.num_cars -= 1
                     break
                 else:
+                    # Error Message Displayed if Customer Tries to Request an Unavailable Car
                     print('Error: Car not available. Please try again')
 
-        # Do if requested cars is both positive and less than or equal to total available cars
-        if len(Car.car_list) >= len(self.requested_cars) > 0:
-            print('Requested the following cars:')
-            for i in self.requested_cars:
-                self.rented_cars.append(Car.car_list[i])
-                print(Car.car_list[i].year, Car.car_list[i].color, Car.car_list[i].make, Car.car_list[i].model)
-        else:
-            print('Error: Only', len(Car.car_list), 'available to check out')
+        print('Requested the following cars:')
+        for i in self.requested_cars:
+            self.rented_cars.append(Car.car_list[i])
+            print(Car.car_list[i].year, Car.car_list[i].color, Car.car_list[i].make, Car.car_list[i].model)
+        print('Adding Cars to ', self.name, '\'s Cart', sep='')
 
     def return_cars(self):
         if len(self.rented_cars) != 0:
