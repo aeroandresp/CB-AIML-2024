@@ -73,6 +73,26 @@ class Customer(Car):
         print('1 ---> Hourly')
         print('2 ---> Daily')
         print('3 ---> Weekly')
+        user_input = int(input('Enter Rental Mode to See Rates of Available Cars: '))
+        if user_input == 1:
+            for i, car_obj in enumerate(Car.car_list):
+                if car_obj.available:
+                    print(i, '--->', car_obj.year, car_obj.color, car_obj.make, car_obj.model,
+                          'Hourly Rate in Dollars:', car_obj.hourly)
+        elif user_input == 2:
+            for i, car_obj in enumerate(Car.car_list):
+                if car_obj.available:
+                    print(i, '--->', car_obj.year, car_obj.color, car_obj.make, car_obj.model,
+                          'Daily Rate in Dollars:', car_obj.daily)
+        elif user_input == 3:
+            for i, car_obj in enumerate(Car.car_list):
+                if car_obj.available:
+                    print(i, '--->', car_obj.year, car_obj.color, car_obj.make, car_obj.model,
+                          'Weekly Rate in Dollars:', car_obj.weekly)
+        else:
+            print('Error: Invalid Option')
+            print('Returning to Main Menu\n\n')
+
 
     # Method for Customer to retrieve cars for rent
     def retrieve_cars(self):

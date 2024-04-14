@@ -43,8 +43,9 @@ def main():
         elif user_input == 5:
             print('Thank you for visiting the Car Rental Platform,', ct1.name)
             print('Have a Wonderful Day!')
+            break
         else:
-            print('Error: Not a valid option')
+            print('Error: Invalid Option')
             print('Returning to Main Menu\n\n')
 
 # Start Script Here
