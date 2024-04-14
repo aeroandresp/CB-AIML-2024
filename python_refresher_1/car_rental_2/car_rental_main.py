@@ -10,8 +10,6 @@ def main():
     c4 = car_rental_functions.Car('Nissan', 'Altima', 2019, 'Blue')
     c5 = car_rental_functions.Car('Ford', 'F-150', 2022, 'Grey')
 
-    # c1.print_car_info()
-
     # Customer 1
     ct1 = car_rental_functions.Customer(input('What is your name? '))
     ct1.print_customer_info()
@@ -19,13 +17,6 @@ def main():
     ct1.retrieve_cars()
     ct1.rental_mode()
     ct1.available_cars()
-
-    # Customer 2
-    ct2 = car_rental_functions.Customer(input('What is your name? '))
-    ct2.print_customer_info()
-    ct2.available_cars()
-    ct2.retrieve_cars()
-    ct2.available_cars()
 
     # Customer 1 Again
     ct1.return_cars()

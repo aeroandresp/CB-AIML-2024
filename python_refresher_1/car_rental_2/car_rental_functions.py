@@ -11,7 +11,7 @@ class Car:
     car_list = []
 
     # Constructor
-    def __init__(self, make, model, year, color, hourly=30, daily=200, weekly=1000):
+    def __init__(self, make, model, year, color, hourly=60, daily=400, weekly=2000):
         ### Car Attributes ###
         self.make = make
         self.model = model
@@ -45,18 +45,6 @@ class Car:
         for i, car_obj in enumerate(Car.car_list):
             if car_obj.available:
                 print(i, '--->', car_obj.year, car_obj.color, car_obj.make, car_obj.model)
-
-    # # Method to Calculate Car Rental Bill from Hourly Rate
-    # def rent_hourly(self, hours):
-    #     return hours * self.hourly
-    #
-    # # Method to Calculate Car Rental Bill from Daily Rate
-    # def rent_daily(self, days):
-    #     return days * self.daily
-    #
-    # # Method to Calculate Car Rental Bill from Weekly Rate
-    # def rent_weekly(self, weeks):
-    #     return weeks * self.weekly
 
 class Customer(Car):
 
@@ -116,7 +104,7 @@ class Customer(Car):
 
         # Record Start Time
         self.rental_start = datetime.now()
-        print('Start of Rental:', self.rental_start)
+        print('Start Time of Rental:', self.rental_start)
 
     def rental_mode(self):
         while True:
@@ -138,15 +126,30 @@ class Customer(Car):
                 print('Rental Method: Weekly')
                 break
             else:
-                print('Error: Not a valid rental method. Please try again')
+                print('Error: Not a valid rental mode. Please try again')
 
     def return_cars(self):
         if len(self.rented_cars) != 0:
+            self.rental_end = datetime.now()
+            self.rental_time = self.rental_end - self.rental_start
+            print('Returning ', self.name, '\'s Cars', sep='')
+            print('End Time of Rental:', self.rental_end)
             print('Returning the following cars:')
             for i in self.requested_cars:
                 Car.car_list[i].available = True
                 Car.num_cars += 1
                 print(Car.car_list[i].year, Car.car_list[i].color, Car.car_list[i].make, Car.car_list[i].model)
+                if self.hour:
+                    conversion = 60*60 # Seconds to Minutes to Hours
+                    self.bill += (self.rental_time.total_seconds()/conversion)*Car.car_list[i].hourly
+                elif self.day:
+                    conversion = 60 * 60 * 24 # Seconds to Minutes to Hours to Days
+                    self.bill += (self.rental_time.total_seconds() / conversion) * Car.car_list[i].daily
+                elif self.week:
+                    conversion = 60 * 60 * 24 * 7  # Seconds to Minutes to Hours to Days to Weeks
+                    self.bill += (self.rental_time.total_seconds() / conversion) * Car.car_list[i].weekly
+            self.bill = round(self.bill, 2)
             self.rented_cars.clear()
+            print(self.name, '\'s Total Bill: $', self.bill, sep='')
         else:
             print('Error: You have no cars rented out')
