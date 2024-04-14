@@ -12,14 +12,6 @@ def main():
 
     # Customer 1
     ct1 = car_rental_functions.Customer('Andres')
-    # ct1.print_customer_info()
-    # ct1.available_cars()
-    # ct1.retrieve_cars()
-    # ct1.rental_mode()
-    # ct1.available_cars()
-    # # Customer 1 Again
-    # ct1.return_cars()
-    # ct1.available_cars()
 
     print('Welcome to the Car Rental Platform, ', ct1.name, '!', sep='')
 

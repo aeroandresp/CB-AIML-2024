@@ -45,6 +45,7 @@ class Car:
         for i, car_obj in enumerate(Car.car_list):
             if car_obj.available:
                 print(i, '--->', car_obj.year, car_obj.color, car_obj.make, car_obj.model)
+        print('\n')
 
 class Customer(Car):
 
