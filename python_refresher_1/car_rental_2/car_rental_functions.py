@@ -26,7 +26,7 @@ class Car:
         ### Car Availability ###
         self.available = True
 
-        ### Other Attributes ###
+        ### Other ###
         Car.car_list.append(self)
         Car.num_cars += 1
 
