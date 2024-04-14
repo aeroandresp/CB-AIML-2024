@@ -101,8 +101,10 @@ class Customer(Car):
         # Do if requested cars (n) is both positive and less than or equal to total available cars
         while True:
             n = int(input("Enter number of cars you would like to request: "))
-            if Car.num_cars >= n > 0:
+            if Car.num_cars > n > 0:
                 break
+            elif Car.num_cars == n:
+                print('Error: Cannot request all cars. Please try again')
             else:
                 print('Error: Only', Car.num_cars, 'available to check out. Please try again')
 
