@@ -21,7 +21,7 @@ def main():
     # ct1.return_cars()
     # ct1.available_cars()
 
-    print('Welcome to the Car Rental PLatform, ', ct1.name, '!', sep='')
+    print('Welcome to the Car Rental Platform, ', ct1.name, '!', sep='')
 
     while True:
         print('Main Menu:')
@@ -30,7 +30,22 @@ def main():
         print('3 ---> Request Cars to Rent')
         print('4 ---> Return Cars')
         print('5 ---> Exit Car Rental Program')
-
+        user_input = int(input('Enter Option You Would Like to do: '))
+        if user_input == 1:
+            ct1.available_cars()
+        elif user_input == 2:
+            ct1.print_rental_modes()
+        elif user_input == 3:
+            ct1.retrieve_cars()
+            ct1.rental_mode()
+        elif user_input == 4:
+            ct1.return_cars()
+        elif user_input == 5:
+            print('Thank you for visiting the Car Rental Platform,', ct1.name)
+            print('Have a Wonderful Day!')
+        else:
+            print('Error: Not a valid option')
+            print('Returning to Main Menu\n\n')
 
 # Start Script Here
 if __name__ == '__main__':

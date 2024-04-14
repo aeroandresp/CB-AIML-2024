@@ -68,6 +68,12 @@ class Customer(Car):
     def print_customer_info(self):
         print(self.name)
 
+    def print_rental_modes(self):
+        print('Rental Modes Available:')
+        print('1 ---> Hourly')
+        print('2 ---> Daily')
+        print('3 ---> Weekly')
+
     # Method for Customer to retrieve cars for rent
     def retrieve_cars(self):
 
