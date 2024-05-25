@@ -26,7 +26,7 @@ print(missing_values)
 # df_filled = df.fillna(df.mean())
 
 # Remove Dollar Sign and Comma from String
-income_fix = income.str.replace(r'[$,]+','', regex=True)
+income_fix = income.str.replace(r'[$,]+', '', regex=True)
 
 # Convert Income Values from Object to Float
 income = income_fix.astype('float')
@@ -37,7 +37,7 @@ print(df['Income'])
 
 # Extract Entries with No Income Info
 empty_entries = df[df['Income'].isnull() == True]
-print(empty_entries['Marital_Status'],empty_entries['Education'])
+print(empty_entries['Marital_Status'], empty_entries['Education'])
 
 # Options for Marital Status in Missing Income Entries are as Follows:
 # Single, Married, Together, and Widow
@@ -50,7 +50,7 @@ print(empty_entries['Marital_Status'],empty_entries['Education'])
 for index, row in empty_entries.iterrows():
     # print(f"Index: {index}, Marital Status: {row['Marital_Status']}, Education: {row['Education']}")
     avg_value = df.loc[(df['Marital_Status'] == row['Marital_Status']) &
-    (df['Education'] == row['Education'])]['Income'].mean()
+                       (df['Education'] == row['Education'])]['Income'].mean()
     # print(avg_value)
     df.loc[index, 'Income'] = avg_value
 
@@ -58,3 +58,13 @@ for index, row in empty_entries.iterrows():
 missing_values = df.isnull().sum()
 print("Missing Values per Column:")
 print(missing_values)
+
+# Find Total Number of Children, Age, and Spending Variables
+current_year = 2024
+df['total_children'] = df['Kidhome'] + df['Teenhome']
+df['age'] = df['Year_Birth'].apply(lambda x: current_year - x)
+df['total_spending'] = (df['MntWines'] + df['MntFruits'] + df['MntMeatProducts']
+                        + df['MntFishProducts'] + df['MntSweetProducts'] + df['MntGoldProds'])
+
+# Total Purchases Across the 3 Channels
+df['total_purchases'] = df['NumWebPurchases'] + df['NumCatalogPurchases'] + df['NumStorePurchases']
