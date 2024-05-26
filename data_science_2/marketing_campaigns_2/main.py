@@ -1,3 +1,5 @@
+from datetime import date
+
 import pandas as pd
 
 # Import Marketing Campaign Data into a Data Frame
@@ -59,12 +61,15 @@ missing_values = df.isnull().sum()
 print("Missing Values per Column:")
 print(missing_values)
 
-# Find Total Number of Children, Age, and Spending Variables
-current_year = 2024
+# 3. Find Total Number of Children, Age, and Spending Variables
+current_year = date.today().year
 df['total_children'] = df['Kidhome'] + df['Teenhome']
 df['age'] = df['Year_Birth'].apply(lambda x: current_year - x)
 df['total_spending'] = (df['MntWines'] + df['MntFruits'] + df['MntMeatProducts']
                         + df['MntFishProducts'] + df['MntSweetProducts'] + df['MntGoldProds'])
 
-# Total Purchases Across the 3 Channels
+
+# 3a. Total Purchases Across the 3 Channels
 df['total_purchases'] = df['NumWebPurchases'] + df['NumCatalogPurchases'] + df['NumStorePurchases']
+
+#
