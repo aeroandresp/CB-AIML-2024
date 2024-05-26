@@ -102,3 +102,20 @@ plt.title('Box Plot: Total Purchases Distribution')
 plt.xlabel('All Data')
 plt.ylabel('Total Purchases in Count')
 plt.show()
+
+# Histogram of Age
+sns.histplot(df['age'], bins=20, kde=True)
+plt.title('Histogram: Distribution of Age')
+plt.show()
+
+# Histogram of Total Spending
+sns.histplot(df['total_spending'], bins=10, kde=True)
+plt.title('Histogram: Distribution of Total Spending')
+plt.show()
+
+# Histogram of Total Purchases
+sns.histplot(df['total_purchases'], bins=20, kde=True)
+plt.title('Histogram: Distribution of Total Purchases')
+plt.show()
+
+# 5. Apply Ordinal and One-Hot Encoding 
