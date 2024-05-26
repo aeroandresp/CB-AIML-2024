@@ -1,5 +1,6 @@
 from datetime import date
-
+import matplotlib.pyplot as plt
+import seaborn as sns
 import pandas as pd
 
 # Import Marketing Campaign Data into a Data Frame
@@ -72,4 +73,32 @@ df['total_spending'] = (df['MntWines'] + df['MntFruits'] + df['MntMeatProducts']
 # 3a. Total Purchases Across the 3 Channels
 df['total_purchases'] = df['NumWebPurchases'] + df['NumCatalogPurchases'] + df['NumStorePurchases']
 
-#
+# 4. Generate Box Plots and Histograms
+
+# Total Children Box Plot (Doesn't make too much sense)
+# sns.boxplot(y='total_children', data=df)
+# plt.title('Box Plot: Total Number of Children Distribution')
+# plt.xlabel('All Data')
+# plt.ylabel('Total Number of Children')
+# plt.show()
+
+# Age Box Plot
+sns.boxplot(y='age', data=df)
+plt.title('Box Plot: Age Distribution')
+plt.xlabel('All Data')
+plt.ylabel('Age in Years')
+plt.show()
+
+# Total Spending Box Plot
+sns.boxplot(y='total_spending', data=df)
+plt.title('Box Plot: Total Spending Distribution')
+plt.xlabel('All Data')
+plt.ylabel('Total Spending in US Dollars')
+plt.show()
+
+# Total Purchases Box Plot
+sns.boxplot(y='total_purchases', data=df)
+plt.title('Box Plot: Total Purchases Distribution')
+plt.xlabel('All Data')
+plt.ylabel('Total Purchases in Count')
+plt.show()
