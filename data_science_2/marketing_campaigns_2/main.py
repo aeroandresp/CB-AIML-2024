@@ -2,6 +2,10 @@ from datetime import date
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+
+# Control Variables
+show_plots = False
 
 # Import Marketing Campaign Data into a Data Frame
 df = pd.read_csv('marketing_data.csv')
@@ -87,35 +91,56 @@ sns.boxplot(y='age', data=df)
 plt.title('Box Plot: Age Distribution')
 plt.xlabel('All Data')
 plt.ylabel('Age in Years')
-plt.show()
+if show_plots:
+    plt.show()
 
 # Total Spending Box Plot
 sns.boxplot(y='total_spending', data=df)
 plt.title('Box Plot: Total Spending Distribution')
 plt.xlabel('All Data')
 plt.ylabel('Total Spending in US Dollars')
-plt.show()
+if show_plots:
+    plt.show()
 
 # Total Purchases Box Plot
 sns.boxplot(y='total_purchases', data=df)
 plt.title('Box Plot: Total Purchases Distribution')
 plt.xlabel('All Data')
 plt.ylabel('Total Purchases in Count')
-plt.show()
+if show_plots:
+    plt.show()
 
 # Histogram of Age
 sns.histplot(df['age'], bins=20, kde=True)
 plt.title('Histogram: Distribution of Age')
-plt.show()
+if show_plots:
+    plt.show()
 
 # Histogram of Total Spending
 sns.histplot(df['total_spending'], bins=10, kde=True)
 plt.title('Histogram: Distribution of Total Spending')
-plt.show()
+if show_plots:
+    plt.show()
 
 # Histogram of Total Purchases
 sns.histplot(df['total_purchases'], bins=20, kde=True)
 plt.title('Histogram: Distribution of Total Purchases')
-plt.show()
+if show_plots:
+    plt.show()
 
-# 5. Apply Ordinal and One-Hot Encoding 
+# 5. Apply Ordinal and One-Hot Encoding
+
+# Apply label encoding
+label_encoder = LabelEncoder()
+df['education_encoded'] = label_encoder.fit_transform(df['Education'])
+
+# After label encoding
+print("\nDataFrame after label encoding:")
+print(df[['Education','education_encoded']].head(30))
+
+# 6. Heat Map
+correlation_matrix = df[['age', 'total_purchases', 'total_spending', 'total_children']].corr()
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
+plt.title('Heatmap: Correlation matrix')
+if show_plots:
+    plt.show() 
