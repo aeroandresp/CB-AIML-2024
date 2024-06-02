@@ -177,13 +177,102 @@ chi_square_statistic=chi_square[0]+chi_square[1]
 critical_value=chi2.ppf(q=1-alpha,df=ddof)
 # P-value
 p_value=1-chi2.cdf(x=chi_square_statistic,df=ddof)
+print('p-value:',p_value)
+print('Significance level: ',alpha)
+print('Degree of Freedom: ',ddof)
+print('chi-square statistic:',chi_square_statistic)
+print('critical_value:',critical_value)
 if chi_square_statistic>=critical_value:
     print("Reject $H_0$, Older individuals prefer traditional in-store shopping")
 else:
     print("Retain $H_0$, Older individuals do not prefer traditional in-store shopping")
 
 if p_value<=alpha:
-    print("Reject $H_0$, Older individuals prefer traditional in-store shopping")
+    print("Reject H_0, Older individuals prefer traditional in-store shopping")
 else:
-    print("Retain $H_0$, Older individuals do not prefer traditional in-store shopping")
+    print("Retain H_0, Older individuals do not prefer traditional in-store shopping")
 ###
+
+###
+# b. People with children lean towards online shopping (chi-square test)
+
+# Make a new features for Chi-Square Test
+df['children'] = df['Kidhome'] > 0 # People with children
+df['online'] = df['NumStorePurchases'] < df['NumWebPurchases'] # Prefer shopping online if store purchases are less than web purchases
+
+# Create Contingency Table
+contingency_table=pd.crosstab(df["children"],df["online"])
+print('contingency_table :-\n',contingency_table)
+
+# Observed Values
+Observed_Values = contingency_table.values
+b=chi2_contingency(contingency_table)
+Expected_Values = b[3]
+no_of_rows=len(contingency_table.iloc[0:2,0])
+no_of_columns=len(contingency_table.iloc[0,0:2])
+ddof=(no_of_rows-1)*(no_of_columns-1)
+alpha = 0.05
+from scipy.stats import chi2
+chi_square=sum([(o-e)**2./e for o,e in zip(Observed_Values,Expected_Values)])
+chi_square_statistic=chi_square[0]+chi_square[1]
+critical_value=chi2.ppf(q=1-alpha,df=ddof)
+# P-value
+p_value=1-chi2.cdf(x=chi_square_statistic,df=ddof)
+print('p-value:',p_value)
+print('Significance level: ',alpha)
+print('Degree of Freedom: ',ddof)
+print('chi-square statistic:',chi_square_statistic)
+print('critical_value:',critical_value)
+if chi_square_statistic>=critical_value:
+    print("Reject H_0, People with children prefer traditional online shopping")
+else:
+    print("Retain H_0, People with children do not prefer traditional online shopping")
+
+if p_value<=alpha:
+    print("Reject H_0, People with children prefer traditional online shopping")
+else:
+    print("Retain H_0, People with children do not prefer traditional online shopping")
+###
+
+###
+# c. Sales at physical stores may face risk by alternate distribution channels (chi-square test)
+
+# Make a new features for Chi-Square Test
+# Prefer in-store
+df['physical'] = (df['NumStorePurchases'] > df['NumWebPurchases']) & (df['NumStorePurchases'] > df['NumCatalogPurchases'])
+df['other'] = ~df['physical'] # Prefer others
+
+# Create Contingency Table
+contingency_table=pd.crosstab(df["physical"],df["other"])
+print('contingency_table :-\n',contingency_table)
+
+# Observed Values
+# Observed_Values = contingency_table.values
+# b=chi2_contingency(contingency_table)
+# Expected_Values = b[3]
+# no_of_rows=len(contingency_table.iloc[0:2,0])
+# no_of_columns=len(contingency_table.iloc[0,0:2])
+# ddof=(no_of_rows-1)*(no_of_columns-1)
+# alpha = 0.05
+# from scipy.stats import chi2
+# chi_square=sum([(o-e)**2./e for o,e in zip(Observed_Values,Expected_Values)])
+# chi_square_statistic=chi_square[0]+chi_square[1]
+# critical_value=chi2.ppf(q=1-alpha,df=ddof)
+# # P-value
+# p_value=1-chi2.cdf(x=chi_square_statistic,df=ddof)
+# print('p-value:',p_value)
+# print('Significance level: ',alpha)
+# print('Degree of Freedom: ',ddof)
+# print('chi-square statistic:',chi_square_statistic)
+# print('critical_value:',critical_value)
+# if chi_square_statistic>=critical_value:
+#     print("Reject H_0, Physical stores face risk of cannibalization by alternative distribution channels")
+# else:
+#     print("Retain H_0, Physical stores do not face risk of cannibalization by alternative distribution channels")
+#
+# if p_value<=alpha:
+#     print("Reject H_0, Physical stores face risk of cannibalization by alternative distribution channels")
+# else:
+#     print("Retain H_0, Physical stores do not face risk of cannibalization by alternative distribution channels")
+###
+
