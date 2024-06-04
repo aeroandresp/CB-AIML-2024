@@ -4,7 +4,7 @@ import seaborn as sns
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from scipy.stats import chi2_contingency
-from scipy.stats import chi2
+from scipy import stats
 
 # Control Variables
 show_plots = False
@@ -235,44 +235,39 @@ else:
 ###
 
 ###
-# c. Sales at physical stores may face risk by alternate distribution channels (chi-square test)
+# c. Sales at physical stores may face risk by alternate distribution channels (t-test)
 
-# Make a new features for Chi-Square Test
-# Prefer in-store
+# Make new features for T-test
+# True = prefer physical
+# False = prefer other
 df['physical'] = (df['NumStorePurchases'] > df['NumWebPurchases']) & (df['NumStorePurchases'] > df['NumCatalogPurchases'])
-df['other'] = ~df['physical'] # Prefer others
 
-# Create Contingency Table
-contingency_table=pd.crosstab(df["physical"],df["other"])
-print('contingency_table :-\n',contingency_table)
+prefer_physical = df[df['physical'] == True]['total_purchases']
+prefer_other = df[df['physical'] == False]['total_purchases']
 
-# Observed Values
-# Observed_Values = contingency_table.values
-# b=chi2_contingency(contingency_table)
-# Expected_Values = b[3]
-# no_of_rows=len(contingency_table.iloc[0:2,0])
-# no_of_columns=len(contingency_table.iloc[0,0:2])
-# ddof=(no_of_rows-1)*(no_of_columns-1)
-# alpha = 0.05
-# from scipy.stats import chi2
-# chi_square=sum([(o-e)**2./e for o,e in zip(Observed_Values,Expected_Values)])
-# chi_square_statistic=chi_square[0]+chi_square[1]
-# critical_value=chi2.ppf(q=1-alpha,df=ddof)
-# # P-value
-# p_value=1-chi2.cdf(x=chi_square_statistic,df=ddof)
-# print('p-value:',p_value)
-# print('Significance level: ',alpha)
-# print('Degree of Freedom: ',ddof)
-# print('chi-square statistic:',chi_square_statistic)
-# print('critical_value:',critical_value)
-# if chi_square_statistic>=critical_value:
-#     print("Reject H_0, Physical stores face risk of cannibalization by alternative distribution channels")
-# else:
-#     print("Retain H_0, Physical stores do not face risk of cannibalization by alternative distribution channels")
-#
-# if p_value<=alpha:
-#     print("Reject H_0, Physical stores face risk of cannibalization by alternative distribution channels")
-# else:
-#     print("Retain H_0, Physical stores do not face risk of cannibalization by alternative distribution channels")
-###
+# Perform the independent two-sample t-test
+t_stat, p_val = stats.ttest_ind(prefer_physical, prefer_other, equal_var=False)
+print("P-Value: ",p_val)
 
+# Interpretation
+alpha = 0.05
+if p_val < alpha:
+    print("Reject the null hypothesis - physical stores at risk of cannibalization by alternative distribution")
+else:
+    print("Fail to reject the null hypothesis - physical stores not at risk of cannibalization by alternative distribution")
+
+# d. Does the United States significantly outperform the rest of the world in total purchase volumes?
+
+us_data = df[df['Country'] == 'US']['total_purchases']
+other_data = df[df['physical'] != 'US']['total_purchases']
+
+# Perform the independent two-sample t-test
+t_stat, p_val = stats.ttest_ind(us_data, other_data, equal_var=False)
+print("P-Value: ",p_val)
+
+# Interpretation
+alpha = 0.05
+if p_val < alpha:
+    print("Reject the null hypothesis: The United States significantly outperforms the rest of the world in total purchase volumes.")
+else:
+    print("Fail to reject the null hypothesis: There is no significant difference in total purchase volumes between the United States and the rest of the world.")
