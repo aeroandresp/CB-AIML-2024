@@ -291,6 +291,8 @@ plt.title('Bar plot: Revenue by Product Category')
 if show_plots:
     plt.show()
 
+print('From the Bar Plot, Wines sold the most while Fruits sold the least')
+
 # b. Correlation between age and accepting last campaign
 
 # Scatter Plot
@@ -300,6 +302,8 @@ plt.ylabel('Acceptance of Last Campaign (1 = Yes, 0 = No)')
 plt.xlabel('Age (years)')
 if show_plots:
     plt.show()
+
+print('From the Scatter PLot, there is no correlation between age and acceptance of the last campaign')
 
 # c. Country with highest number of customers that accepted the last campaign
 
@@ -312,6 +316,8 @@ plt.title('Bar plot: Countries that Accepted Last Campaign')
 if show_plots:
     plt.show()
 
+print('From the Bar Plot, Spain has the highest number of customers that accepted the last campaign')
+
 # d. Pattern between number of children and total expenditure
 
 # Box Plot
@@ -319,6 +325,8 @@ sns.boxplot(x='total_children', y='total_spending', data=df)
 plt.title('Box plot: Total Spending Based on Total Children')
 if show_plots:
     plt.show()
+
+print('From the Box Plot, customers with no children spent the most while those with children spent less money')
 
 # e. Educational Background vs Complaints
 
@@ -330,3 +338,5 @@ sns.barplot(x=complain_data.index, y=complain_data.values)
 plt.title('Bar plot: People that Complain Based Off of Education')
 if show_plots:
     plt.show()
+
+print('From the Bar Plot, Customers with just a graduation background complained the most while higher degree customer complained the least')
