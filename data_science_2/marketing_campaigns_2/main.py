@@ -229,9 +229,9 @@ else:
     print("Retain H_0, People with children do not prefer online shopping")
 
 if p_value<=alpha:
-    print("Reject H_0, People with children prefer traditional online shopping")
+    print("Reject H_0, People with children prefer online shopping")
 else:
-    print("Retain H_0, People with children do not prefer traditional online shopping")
+    print("Retain H_0, People with children do not prefer online shopping")
 ###
 
 ###
@@ -283,7 +283,7 @@ products = [
 
 # Calculate total revenue for each product category
 revenue = df[products].sum()
-print(revenue)
+# print(revenue)
 
 # Bar Plot
 sns.barplot(x=revenue.index, y=revenue.values)
