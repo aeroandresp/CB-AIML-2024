@@ -7,7 +7,7 @@ from scipy.stats import chi2_contingency
 from scipy import stats
 
 # Control Variables
-show_plots = False
+show_plots = True
 
 # Import Marketing Campaign Data into a Data Frame
 df = pd.read_csv('marketing_data.csv')
@@ -183,9 +183,9 @@ print('Degree of Freedom: ',ddof)
 print('chi-square statistic:',chi_square_statistic)
 print('critical_value:',critical_value)
 if chi_square_statistic>=critical_value:
-    print("Reject $H_0$, Older individuals prefer traditional in-store shopping")
+    print("Reject H_0, Older individuals prefer traditional in-store shopping")
 else:
-    print("Retain $H_0$, Older individuals do not prefer traditional in-store shopping")
+    print("Retain H_0, Older individuals do not prefer traditional in-store shopping")
 
 if p_value<=alpha:
     print("Reject H_0, Older individuals prefer traditional in-store shopping")
@@ -224,9 +224,9 @@ print('Degree of Freedom: ',ddof)
 print('chi-square statistic:',chi_square_statistic)
 print('critical_value:',critical_value)
 if chi_square_statistic>=critical_value:
-    print("Reject H_0, People with children prefer traditional online shopping")
+    print("Reject H_0, People with children prefer online shopping")
 else:
-    print("Retain H_0, People with children do not prefer traditional online shopping")
+    print("Retain H_0, People with children do not prefer online shopping")
 
 if p_value<=alpha:
     print("Reject H_0, People with children prefer traditional online shopping")
@@ -271,3 +271,62 @@ if p_val < alpha:
     print("Reject the null hypothesis: The United States significantly outperforms the rest of the world in total purchase volumes.")
 else:
     print("Fail to reject the null hypothesis: There is no significant difference in total purchase volumes between the United States and the rest of the world.")
+
+# 8. Visual Analyzation
+
+# a. Identify top performing product and ones with lowest revenue
+
+products = [
+    'MntWines', 'MntFruits', 'MntMeatProducts', 'MntFishProducts',
+    'MntSweetProducts', 'MntGoldProds'
+]
+
+# Calculate total revenue for each product category
+revenue = df[products].sum()
+print(revenue)
+
+# Bar Plot
+sns.barplot(x=revenue.index, y=revenue.values)
+plt.title('Bar plot: Revenue by Product Category')
+if show_plots:
+    plt.show()
+
+# b. Correlation between age and accepting last campaign
+
+# Scatter Plot
+sns.scatterplot(x='age', y='Response', data=df)
+plt.title('Scatter plot: Correlation between Age and Acceptance of Last Campaign')
+plt.ylabel('Acceptance of Last Campaign (1 = Yes, 0 = No)')
+plt.xlabel('Age (years)')
+if show_plots:
+    plt.show()
+
+# c. Country with highest number of customers that accepted the last campaign
+
+# Calculate campaign data based off Country
+campaign_data = df[df['Response'] == 1]['Country'].value_counts()
+
+# Bar Plot
+sns.barplot(x=campaign_data.index, y=campaign_data.values)
+plt.title('Bar plot: Countries that Accepted Last Campaign')
+if show_plots:
+    plt.show()
+
+# d. Pattern between number of children and total expenditure
+
+# Box Plot
+sns.boxplot(x='total_children', y='total_spending', data=df)
+plt.title('Box plot: Total Spending Based on Total Children')
+if show_plots:
+    plt.show()
+
+# e. Educational Background vs Complaints
+
+# Calculate campaign data based off Country
+complain_data = df[df['Complain'] == 1]['Education'].value_counts()
+
+# Bar Plot
+sns.barplot(x=complain_data.index, y=complain_data.values)
+plt.title('Bar plot: People that Complain Based Off of Education')
+if show_plots:
+    plt.show()
