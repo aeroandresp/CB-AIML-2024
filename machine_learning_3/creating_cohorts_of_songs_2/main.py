@@ -5,10 +5,15 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 
 # Create Data Frame
-df = pd.read_csv('HR_comma_sep.csv')
+df = pd.read_csv('rolling_stones_spotify.csv')
+
+# 1. Initial Data Inspection and Cleaning:
+# Look for duplicates, missing values,
+# irrelevant entries, or outliers
 
 # Show info
 print(df.info())
-
-# Show first rows
 print(df.head())
+
+# Check for missing values in data
+print(df.isna().sum())
