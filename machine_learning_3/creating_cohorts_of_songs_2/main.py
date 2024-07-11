@@ -1,3 +1,4 @@
+import functions
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -28,13 +29,6 @@ df1 = df.drop(columns='Unnamed: 0')
 # Box Plots
 columns = df1.columns.tolist()
 print(columns)
+functions.box_plot_outlier(df, columns, show_plots)
 
-for col in columns:
-    # print(col, 'is', df1[col].dtypes)
-    if df1[col].dtypes != 'object':
-        sns.boxplot(y=col, data=df1)
-        plt.title('Box Plot')
-        plt.xlabel('All Data')
-        plt.ylabel(col)
-        if show_plots:
-            plt.show()
+
