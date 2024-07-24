@@ -35,4 +35,16 @@ columns = df1.columns.tolist()
 # print(columns)
 functions.box_plot_outlier(df, columns, show_plots)
 
+###
+# Perform outlier treatment here (Work in Progress)
+###
 
+# 2. Refine Data (Work in Progress)
+
+# 3. Perform Exploritory Data Analysis and Feature Engineering
+# a. Use visualizations to identify the two most popular albums
+
+print(df['popularity'])
+print(df['album'].unique())
+# sns.scatterplot(data=df, x="id", y="popularity")
+# plt.show()
