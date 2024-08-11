@@ -35,9 +35,9 @@ columns = df1.columns.tolist()
 # print(columns)
 functions.box_plot_outlier(df, columns, show_plots)
 
-###
+####################################################
 # Perform outlier treatment here (Work in Progress)
-###
+####################################################
 
 # 2. Refine Data (Work in Progress)
 
@@ -48,3 +48,19 @@ print(df['popularity'])
 print(df['album'].unique())
 # sns.scatterplot(data=df, x="id", y="popularity")
 # plt.show()
+
+# b. Delve into Various Features of Songs,
+# Aiming to Identify Patterns
+
+# c. Examine the Relationship Between a Song's Popularity
+# and Various Factors, Exploring How This Correlation has Evolved
+
+# d. Provide Insights on the Significance of Dimensionality Reduction
+# Techniques. Share your Ideas and Elucidate your Observations
+
+# 4. Perform Cluster Analysis
+# a. Identify the Right Number of Clusters
+
+# b. Use Appropriate Clustering Algorithms
+
+# c. Define Each Cluster Based on the Features
