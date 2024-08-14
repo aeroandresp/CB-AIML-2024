@@ -7,7 +7,7 @@ import seaborn as sns
 from sklearn.cluster import KMeans
 
 # Control Variables
-show_plots = False
+show_plots = True
 
 # Create Data Frame
 df = pd.read_csv('rolling_stones_spotify.csv')
@@ -44,10 +44,21 @@ functions.box_plot_outlier(df, columns, show_plots)
 # 3. Perform Exploritory Data Analysis and Feature Engineering
 # a. Use visualizations to identify the two most popular albums
 
-print(df['popularity'])
+# print(df['popularity'])
+
+# Shows Unique Entries in the "Album" Column
 print(df['album'].unique())
-# sns.scatterplot(data=df, x="id", y="popularity")
-# plt.show()
+
+# Groups Data Based on Album, then the Sum of "Popularity"
+# is Taken Based on "Album," and finally, Values are Sorted
+df_total_popular = df.groupby(['album'])['popularity'].sum().sort_values(ascending=False)
+print('Most Popular Albums', df_total_popular.head())
+
+# Bar Plot
+sns.barplot(x=df_total_popular.tail().index, y=df_total_popular.head().values)
+plt.title('Bar plot')
+if show_plots:
+    plt.show()
 
 # b. Delve into Various Features of Songs,
 # Aiming to Identify Patterns
