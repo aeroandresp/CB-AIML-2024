@@ -49,14 +49,47 @@ functions.box_plot_outlier(df, columns, show_plots)
 # Shows Unique Entries in the "Album" Column
 print(df['album'].unique())
 
+# Number of Top Albums to Show
+n_top_albums = 5
+
 # Groups Data Based on Album, then the Sum of "Popularity"
 # is Taken Based on "Album," and finally, Values are Sorted
 df_total_popular = df.groupby(['album'])['popularity'].sum().sort_values(ascending=False)
-print('Most Popular Albums', df_total_popular.head())
+print('Most Popular Albums', df_total_popular.head(n_top_albums))
 
 # Bar Plot
-sns.barplot(x=df_total_popular.tail().index, y=df_total_popular.head().values)
-plt.title('Bar plot')
+sns.barplot(x=df_total_popular.head(n_top_albums).index,
+            y=df_total_popular.head(n_top_albums).values,
+            hue=df_total_popular.head(n_top_albums).index,
+            legend=True)
+title_str = ('Bar plot: ' + str(n_top_albums) +
+             ' Best Albums Based on Highest Total Popularity')
+plt.title(title_str)
+if show_plots:
+    plt.show()
+
+# Minimum Popularity Value to be Considered "Popular Song"
+popularity_threshold = 50
+df_most_popular = df[df['popularity'] > popularity_threshold]['album'].value_counts()
+
+print('Number of Most Popular Albums Based on Popularity Above',
+      popularity_threshold,
+      '\n',
+      df_most_popular)
+
+# Bar Plot
+sns.barplot(x=df_most_popular.head(n_top_albums).index,
+            y=df_most_popular.head(n_top_albums).values,
+            hue=df_most_popular.head(n_top_albums).index,
+            legend=True)
+title_str = ('Bar plot: ' + str(n_top_albums) +
+             ' Best Albums Based on Number of Songs'
+             ' with a Popularity Score Higher than ' +
+             str(popularity_threshold))
+plt.title(title_str)
+#add legend to bar chart
+# print(df_most_popular.index.tolist()[:n_top_albums])
+# plt.legend(df_most_popular.index.tolist()[:n_top_albums])
 if show_plots:
     plt.show()
 
