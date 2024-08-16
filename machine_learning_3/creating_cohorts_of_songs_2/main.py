@@ -7,7 +7,7 @@ import seaborn as sns
 from sklearn.cluster import KMeans
 
 # Control Variables
-show_plots = True
+show_plots = False
 
 # Create Data Frame
 df = pd.read_csv('rolling_stones_spotify.csv')
@@ -24,16 +24,36 @@ print(df.info())
 print('Number of missing values for each column:')
 print(df.isna().sum())
 
-# Drop Unnamed Column
-df1 = df.drop(columns='Unnamed: 0')
+# Drop Unnecessary Columns
+col_drop = ['Unnamed: 0',
+            'release_date',
+            'id',
+            'uri',
+            'track_number']
+df = df.drop(columns=col_drop)
+
+# Show info after Dropping Columns
+print(df.info())
 
 # Check for duplicates
-print('Number of duplicate entries:', df1.duplicated().sum())
+print('Number of duplicate entries:', df.duplicated().sum())
+
+df = df.drop_duplicates()
+
+# Check for duplicates after dropping them
+print('Number of duplicate entries after dropping:', df.duplicated().sum())
+print(df.info())
 
 # Box plots to detect outliers
-columns = df1.columns.tolist()
+columns = df.columns.tolist()
 # print(columns)
 functions.box_plot_outlier(df, columns, show_plots)
+
+# Remove Outliers using IQR
+q1 = 0.25
+q3 = 0.75
+threshold = 1.5
+# functions.remove_outliers_iqr(df, columns, q1, q3, threshold)
 
 ####################################################
 # Perform outlier treatment here (Work in Progress)
@@ -69,7 +89,7 @@ if show_plots:
     plt.show()
 
 # Minimum Popularity Value to be Considered "Popular Song"
-popularity_threshold = 50
+popularity_threshold = 40
 df_most_popular = df[df['popularity'] > popularity_threshold]['album'].value_counts()
 
 print('Number of Most Popular Albums Based on Popularity Above',
@@ -87,11 +107,11 @@ title_str = ('Bar plot: ' + str(n_top_albums) +
              ' with a Popularity Score Higher than ' +
              str(popularity_threshold))
 plt.title(title_str)
-#add legend to bar chart
-# print(df_most_popular.index.tolist()[:n_top_albums])
-# plt.legend(df_most_popular.index.tolist()[:n_top_albums])
 if show_plots:
     plt.show()
+
+# print(df_most_popular.index.tolist()[:n_top_albums])
+# plt.legend(df_most_popular.index.tolist()[:n_top_albums])
 
 # b. Delve into Various Features of Songs,
 # Aiming to Identify Patterns
