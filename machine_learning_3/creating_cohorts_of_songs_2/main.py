@@ -7,7 +7,10 @@ import seaborn as sns
 from sklearn.cluster import KMeans
 
 # Control Variables
-show_plots = False
+show_plots = True
+q1 = 0.25
+q3 = 0.75
+threshold = 1.5
 
 # Create Data Frame
 df = pd.read_csv('rolling_stones_spotify.csv')
@@ -50,10 +53,12 @@ columns = df.columns.tolist()
 functions.box_plot_outlier(df, columns, show_plots)
 
 # Remove Outliers using IQR
-q1 = 0.25
-q3 = 0.75
-threshold = 1.5
-# functions.remove_outliers_iqr(df, columns, q1, q3, threshold)
+df = functions.remove_outliers_iqr(df, columns, q1, q3, threshold)
+
+# Show info after Dropping Outliers
+print('Data after outlier treatment')
+print(df.info())
+functions.box_plot_outlier(df, columns, show_plots)
 
 ####################################################
 # Perform outlier treatment here (Work in Progress)
@@ -67,10 +72,10 @@ threshold = 1.5
 # print(df['popularity'])
 
 # Shows Unique Entries in the "Album" Column
-print(df['album'].unique())
+# print(df['album'].unique())
 
 # Number of Top Albums to Show
-n_top_albums = 5
+n_top_albums = 2
 
 # Groups Data Based on Album, then the Sum of "Popularity"
 # is Taken Based on "Album," and finally, Values are Sorted

@@ -31,4 +31,5 @@ def remove_outliers_iqr(df, columns, q1, q3, threshold):
             # print('Outliers in', col, 'are as follows:', outliers)
 
             # drop rows containing outliers
-            # df = df.drop(outliers.index)
+            df = df.drop(outliers.index)
+    return df
